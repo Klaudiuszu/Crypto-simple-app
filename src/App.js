@@ -1,6 +1,6 @@
 import './App.css';
-import {useEffect, useState} from 'react';
-import  axios from 'axios';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
   //reslove
@@ -21,8 +21,32 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    fetchData(https://api.coingecko.com/api/v3/exchanges?per_page=100&page=1)
+    },[itemPerPage]);
+  // },[something] => when value change
+
+  const DataList = ({data}) => {
+    return (
+      <div>
+        {/* Item is whole element in array */}
+        {data.map((item, index) => (
+          <div key={index}>{item.country}</div>
+        ))}
+      </div>
+    )
+  }
+
+  const Button = (props) => {
+    return (
+      <button onClick={() => setItemPerPage(itemPerPage + 10)}>{props.button}</button>
+    )
+  }
+
   return (
     <div className="App">
+      <DataList data={data} />
+      <Button />
     </div>
   );
 }
