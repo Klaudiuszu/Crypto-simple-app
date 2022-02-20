@@ -2,6 +2,8 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const apiLink = "https://api.coingecko.com/api/v3/exchanges?per_page=100&page=1";
+
 function App() {
   //reslove
   const [data, setData] = useState([]);
@@ -21,10 +23,7 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    fetchData(https://api.coingecko.com/api/v3/exchanges?per_page=100&page=1)
-    },[itemPerPage]);
-  // },[something] => when value change
+
 
   const DataList = ({data}) => {
     return (
@@ -37,16 +36,20 @@ function App() {
     )
   }
 
-  const Button = (props) => {
-    return (
-      <button onClick={() => setItemPerPage(itemPerPage + 10)}>{props.button}</button>
-    )
-  }
+  useEffect(() => {
+    fetchData(apiLink)
+    // deppendencies array
+},[])
+  // }) => every render
+  // },[]) => first render
+  // },[something] => when value change
+
+  
+
 
   return (
     <div className="App">
       <DataList data={data} />
-      <Button />
     </div>
   );
 }
