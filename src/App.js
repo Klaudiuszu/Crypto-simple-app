@@ -1,7 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import IMAGES from './images.js';
+import Scroll from './Scroll.js';
+import IMAGES from './images';
 
 function App() {
   //reslove
@@ -45,7 +46,7 @@ function App() {
   }
 
   const Button = (props) => {
-    console.log(data)
+    //console.log(data)
     return(
       <button onClick={() => setItemPerPage(itemPerPage +1)} >{props.text}</button>
     )
@@ -66,6 +67,7 @@ function App() {
 
 
   return (
+    
     <div className="App">
       <DataList data={data} />
       <Button text="..." />
@@ -75,6 +77,7 @@ function App() {
         </div>
         )
       }
+      <Scroll />
     </div>
   );
 }
