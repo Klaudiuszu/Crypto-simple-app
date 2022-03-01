@@ -39,6 +39,7 @@ function App() {
           <p className='text'>{item.name}</p>
           <p className='text'>{item.country}</p>
           <img src={item.image}></img>
+          <p> <button>link</button></p>
           </div>
         ))}
       </div>
@@ -46,7 +47,7 @@ function App() {
   }
 
   const Button = (props) => {
-    //console.log(data)
+    console.log(data)
     return(
       <button onClick={() => setItemPerPage(itemPerPage +1)} >{props.text}</button>
     )

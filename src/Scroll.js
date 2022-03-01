@@ -9,15 +9,15 @@ function Scroll() {
 
   const handleScroll = () => {
     const position = window.pageYOffset;
+    let maxiumScrollValue = Math.max([position]);
     setScrollPosition(position);    
+    if(maxiumScrollValue){
+      //document.body.style.backgroundColor = "pink";
+    }
+    
   };
 
-  const myDiv = document.querySelector('.App');  
-myDiv.addEventListener('scroll', () => {  
-  if (myDiv.offsetHeight + myDiv.scrollTop >= myDiv.scrollHeight) {  
-    console.log('scrolled to bottom')  
-  }  
-});
+
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
