@@ -15,6 +15,7 @@ body {
 }
 
 .column {
+  align-items: baseline;
   font-family: 'Poppins', sans-serif;
   flex: 25%;
   max-width: 20%;
@@ -31,11 +32,34 @@ body {
   ;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.linkButton {
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  height: 40px;
+  text-align: center;
+  width: 110px;
+  border-radius: 2px;
+  background: #1f2933;
+  border: 2px solid #1f2933;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font-weight: bold;
+  color: #F5F7FA;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.linkButton:hover{
+  background: #9AA5B1;
+  color: #1f2933;
+  border: 2px solid #9AA5B1;
+}
+
+@media (max-width:  1110px) {
+  .row {
+    font-size: .8rem;
+    
+    
   }
 }
+
