@@ -15,7 +15,10 @@ body {
 }
 
 .column {
-  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-family: 'Poppins', sans-serif;
   flex: 25%;
   max-width: 20%;
@@ -34,25 +37,26 @@ body {
 
 .linkButton {
   font-family: 'Poppins', sans-serif;
-  outline: none;
-  height: 40px;
-  text-align: center;
-  width: 110px;
+  text-decoration: none;
+  margin-top: 12px;
   border-radius: 2px;
   background: #1f2933;
-  border: 2px solid #1f2933;
+  border: 7px solid #1f2933;
   letter-spacing: 1px;
-  text-shadow: 0;
   font-weight: bold;
+  font-size: 1rem;
   color: #F5F7FA;
   cursor: pointer;
+  margin-bottom: 12px;
   transition: all 0.25s ease;
 }
 
 .linkButton:hover{
   background: #9AA5B1;
   color: #1f2933;
-  border: 2px solid #9AA5B1;
+  border: 6px solid #9AA5B1;
+  margin-top: 12px;
+  margin-bottom: 24px;
 }
 
 @media (max-width:  1110px) {
