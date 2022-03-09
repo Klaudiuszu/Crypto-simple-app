@@ -116,10 +116,23 @@ function App() {
     };
   }, []);
 
+  const NavBar = () => {
+
+    return(
+    <div className="navbar">
+    <input placeholder="input cypto name" name="name" id='name' required className="input" value={search} onChange={(e) => setSearch(e.target.value)} />
+    </div>
+    );
+  }
+
   return (
     <div className="App">
-      <input value={search} onChange={(e) => setSearch(e.target.value)} />
+      <NavBar 
+        
+      />
+      
       <DataList data={data} />
+      
     </div>
   );
 }
