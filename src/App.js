@@ -114,7 +114,7 @@ function App() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [itemPerPage]);
 
   const NavBar = () => {
 
@@ -127,12 +127,8 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar 
-        
-      />
-      
+      <NavBar/>
       <DataList data={data} />
-      
     </div>
   );
 }
