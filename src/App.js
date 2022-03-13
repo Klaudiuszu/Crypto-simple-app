@@ -1,8 +1,10 @@
 import "./App.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "./components/spinner/Spinner";
 
 function App() {
+
   //reslove
   const [data, setData] = useState([]);
   //rejected
@@ -51,6 +53,7 @@ function App() {
                 <p className="text">{item.country}</p>
                 <img src={item.image}></img>
                 <a  href={item.url} class="linkButton">LINK</a>
+                <Spinner speed={5} customText={"Loading..."}/>
               </div>
             );
           }
@@ -101,6 +104,7 @@ function App() {
       html.offsetHeight
     );
     const windowBottom = windowHeight + window.pageYOffset;
+    const spinnerContainer = document.querySelector(".spinner-container");
 
     if (windowBottom >= docHeight) {
       setBottomReached(true);

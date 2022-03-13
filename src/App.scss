@@ -102,3 +102,20 @@ body {
   }
 }
 
+@media(max-width: 390px){
+
+  .input {
+    width: 80%;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+
+    .column {
+      max-width: none;
+    }
+  }
+
+}
+
