@@ -3,8 +3,60 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "./components/spinner/Spinner";
 
-function App() {
+const searchParams = ["name"];
 
+const searchResults = (items, searchParams, search) => {
+  return items.filter((item) =>
+    searchParams.some((newItem) =>
+      item[newItem]
+        .toString()
+        .toLowerCase()
+        .substring(0, search.length)
+        .includes(search)
+    )
+  );
+};
+
+const NavBar = ({ search, setSearch }) => {
+  return (
+    <div className="navbar">
+      <input
+        placeholder="input cypto name"
+        name="name"
+        id="name"
+        required
+        className="input"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </div>
+  );
+};
+
+const DataList = ({ data, search }) => {
+  return (
+    <div className="row">
+      {/* Item is whole element in array */}
+      {searchResults(data, searchParams, search.toString().toLowerCase()).map(
+        (item) => {
+          return (
+            <div className="column" key={item.id}>
+              <p className="text">{item.name}</p>
+              <p className="text">{item.country}</p>
+              <img src={item.image}></img>
+              <a href={item.url} class="linkButton">
+                LINK
+              </a>
+              <Spinner speed={5} customText={"Loading..."} />
+            </div>
+          );
+        }
+      )}
+    </div>
+  );
+};
+
+function App() {
   //reslove
   const [data, setData] = useState([]);
   //rejected
@@ -16,7 +68,7 @@ function App() {
 
   const [bottomReached, setBottomReached] = useState(false);
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   const [offset, setOffset] = useState(20);
 
@@ -30,38 +82,6 @@ function App() {
   // const c = ["a", "b"];
   // const b = [...a, "d", ...c];
 
-  const fetchData = async (url) => {
-    try {
-      const response = await axios.get(url);
-      setData(response.data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const DataList = ({ data }) => {
-    return (
-      <div className="row">
-        {/* Item is whole element in array */}
-        {data.map((item, index) => {
-          if (item.name.includes(search)) {
-            return (
-              <div className="column" key={index}>
-                <p className="text">{item.name}</p>
-                <p className="text">{item.country}</p>
-                <img src={item.image}></img>
-                <a  href={item.url} class="linkButton">LINK</a>
-                <Spinner speed={5} customText={"Loading..."}/>
-              </div>
-            );
-          }
-        })}
-      </div>
-    );
-  };
-
   // const Button = (props) => {
   //   console.log(data);
   //   return (
@@ -71,7 +91,21 @@ function App() {
   //   );
   // };
 
+  console.log(loading);
   useEffect(() => {
+    const fetchData = async (url) => {
+      setLoading(true);
+      try {
+        const response = await axios.get(url);
+        setData(response.data);
+      } catch (err) {
+        console.log(err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchData(initalCallApi);
     setBottomReached(false);
   }, [itemPerPage]);
@@ -120,19 +154,13 @@ function App() {
     };
   }, [itemPerPage]);
 
-  const NavBar = () => {
-
-    return(
-    <div className="navbar">
-    <input placeholder="input cypto name" name="name" id='name' required className="input" value={search} onChange={(e) => setSearch(e.target.value)} />
-    </div>
-    );
-  }
-
   return (
     <div className="App">
-      <NavBar/>
-      <DataList data={data} />
+      <NavBar search={search} setSearch={setSearch} />
+      <DataList data={data} search={search} />
+      {loading && <div styles={{position: "absolute", color: "white", left: "50%", top: "50%"}}>
+          LOADING
+      </div>}
     </div>
   );
 }
