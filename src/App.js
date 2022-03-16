@@ -1,7 +1,6 @@
 import "./App.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Spinner from "./components/spinner/Spinner";
 
 const searchParams = ["name"];
 
@@ -44,10 +43,9 @@ const DataList = ({ data, search }) => {
               <p className="text">{item.name}</p>
               <p className="text">{item.country}</p>
               <img src={item.image}></img>
-              <a href={item.url} class="linkButton">
+              <a href={item.url} className="linkButton">
                 LINK
               </a>
-              <Spinner speed={5} customText={"Loading..."} />
             </div>
           );
         }
@@ -70,7 +68,7 @@ function App() {
 
   const [search, setSearch] = useState("");
 
-  const [offset, setOffset] = useState(20);
+
 
   //const [limit, setLimit] = useState(5);
 
@@ -91,7 +89,6 @@ function App() {
   //   );
   // };
 
-  console.log(loading);
   useEffect(() => {
     const fetchData = async (url) => {
       setLoading(true);
@@ -138,13 +135,15 @@ function App() {
       html.offsetHeight
     );
     const windowBottom = windowHeight + window.pageYOffset;
-    const spinnerContainer = document.querySelector(".spinner-container");
 
+    setTimeout(() => {
     if (windowBottom >= docHeight) {
       setBottomReached(true);
       setItemPerPage(itemPerPage + 4);
       return;
     }
+  }, 100);
+    
   };
 
   useEffect(() => {
@@ -152,15 +151,17 @@ function App() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [itemPerPage]);
+  },[itemPerPage]);
 
   return (
     <div className="App">
+    {loading &&
+        <div className="centering-loader">
+        <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+      </div>
+      }
       <NavBar search={search} setSearch={setSearch} />
       <DataList data={data} search={search} />
-      {loading && <div styles={{position: "absolute", color: "white", left: "50%", top: "50%"}}>
-          LOADING
-      </div>}
     </div>
   );
 }
